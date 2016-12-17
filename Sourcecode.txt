@@ -1,0 +1,185 @@
+/* ========================================
+ *
+ * Copyright YOUR COMPANY, THE YEAR
+ * All Rights Reserved
+ * UNPUBLISHED, LICENSED SOFTWARE.
+ *
+ * CONFIDENTIAL AND PROPRIETARY INFORMATION
+ * WHICH IS THE PROPERTY OF your company.
+ *
+ * ========================================
+*/
+#include "project.h"
+void blink();
+void eyebrow();
+void smile();
+void jaw_open();
+void tilt_head();
+void sad();
+
+int main(void)
+{
+   // CyGlobalIntEnable; /* Enable global interrupts. */
+
+    /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+
+    #include "project.h"
+
+    eyebrow();
+    blink();
+    smile();
+    jaw_open();
+    sad();
+    tilt_head();
+    return 0;
+}      
+
+void eyeball_movement(){
+    int i;
+    CyDelay(2000);
+    Left_Eyeball_Start();
+    Right_Eyeball_Start();
+    for(i = 0;i<10;i++)
+    {
+        Left_Eyeball_WriteCompare1(1500);
+        Right_Eyeball_WriteCompare1(1500);
+        Left_Eyeball_WriteCompare2(1500);
+        Right_Eyeball_WriteCompare2(1500);
+        CyDelay(2000);
+        Left_Eyeball_WriteCompare1(6500);
+        Right_Eyeball_WriteCompare1(6500);
+        Left_Eyeball_WriteCompare2(6500);
+        Right_Eyeball_WriteCompare2(6500);
+        CyDelay(1000);
+        }
+   
+
+}
+
+void eyebrow()
+{
+    int i;
+    Left_Eyebrow_Start();
+    Right_Eyebrow_Start();
+    for(i = 0;i<4;i++)
+    {
+        
+        // motor 1 -> 0.2
+        Left_Eyebrow_WriteCompare1(4500); //done
+        // motor 2 -> 1.4 - not working
+        Right_Eyebrow_WriteCompare1(6000);  //done
+       //0.3
+        Left_Eyebrow_WriteCompare2(2000); //done
+        //1.5
+        Right_Eyebrow_WriteCompare2(4500);  //done
+        CyDelay(1000);
+        Left_Eyebrow_WriteCompare1(6000); //done
+        Right_Eyebrow_WriteCompare1(4500);  //done
+        Left_Eyebrow_WriteCompare2(4500); //done
+        
+        Right_Eyebrow_WriteCompare2(2000);  //done
+        CyDelay(1000);
+    }
+  
+}
+
+void blink(){
+    int i;
+    CyDelay(1000);
+    //9 -> 1.6
+    Eyelid_Start();
+    for(i = 0;i<3;i++)
+    {   //motor 10 -> 1.6
+        Eyelid_WriteCompare1(2000); //done
+        CyDelay(1000);
+        
+        Eyelid_WriteCompare1(3000);  //done
+        
+        CyDelay(1000);
+    }
+}
+
+void smile(){
+    CyDelay(1000);
+    Lips_Start();
+    BaseAndJaw_Start();
+    //MOTOR 13 -> 0.0    
+    Lips_WriteCompare1(3000);
+    //MOTOR 14 -> 0.1
+    Lips_WriteCompare2(2000);
+    BaseAndJaw_WriteCompare1(2000);
+          
+    CyDelay(3000);
+    
+    Lips_WriteCompare1(2000);
+    Lips_WriteCompare2(3000);
+    BaseAndJaw_WriteCompare1(3000);
+           
+    CyDelay(1000);
+
+}
+    
+void jaw_open(){
+    int i;
+    BaseAndJaw_Start();
+    for(i = 0;i<5;i++)
+    {
+        //11 -> 0.6
+        BaseAndJaw_WriteCompare1(2000);
+        //17 -> 15.0
+        // BaseAndJaw_WriteCompare2(1500);
+        CyDelay(1000);
+        BaseAndJaw_WriteCompare1(3000);
+        //BaseAndJaw_WriteCompare2(6500);
+        CyDelay(1000);
+    }
+}
+
+void tilt_head(){
+    // CyDelay(3000);
+    Neck_Start();
+    //motor 16 -> 0.4
+    Neck_WriteCompare2(2500);
+    //motor 15 -> 0.5
+    Neck_WriteCompare1(2500);
+    CyDelay(1000);
+    Neck_WriteCompare2(4500);
+    Neck_WriteCompare1(4500);
+    CyDelay(1000);
+    Neck_WriteCompare2(3500);
+    Neck_WriteCompare1(3500);
+   
+    CyDelay(1000);
+}
+    
+
+void sad(){
+    int i;
+    Left_Eyebrow_Start();
+    Right_Eyebrow_Start();
+    
+    Eyelid_Start();
+    //motor 9 -> 1.6
+    Eyelid_WriteCompare1(2500); //done
+    Left_Eyebrow_WriteCompare1(4500); //done
+    // motor 2 -> 1.4 - not working
+    Right_Eyebrow_WriteCompare1(6000);  //done
+    //motor 3 -> 0.3
+    Left_Eyebrow_WriteCompare2(2000); //done
+    //motor 4 -> 1.5
+    Right_Eyebrow_WriteCompare2(4500);  //done
+       
+    CyDelay(3000);
+    Eyelid_WriteCompare1(3000);  //done
+    Left_Eyebrow_WriteCompare1(6000); //done
+    Right_Eyebrow_WriteCompare1(4500);  //done
+    Left_Eyebrow_WriteCompare2(4500); //done    
+    Right_Eyebrow_WriteCompare2(2000);  //done
+
+
+}
+
+ 
+
+
+/* [] END OF FILE */
